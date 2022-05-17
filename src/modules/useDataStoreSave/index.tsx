@@ -12,7 +12,7 @@ export type LazyQueryTuple<TData> = [
   QueryResult<TData>
 ];
 
-export const useDataStoreDelete = <
+export const useDataStoreSave = <
   ResultType extends {},
   VariablesType extends {} = {}
 >(
