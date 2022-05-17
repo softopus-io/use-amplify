@@ -7,5 +7,17 @@ import { AuthMode } from "./types/global";
 import { useLazyQuery } from "./modules/useLazyQuery";
 import { useLazySubscription } from "./modules/useLazySubscription";
 import { usePaginatedQuery } from "./modules/usePaginatedQuery";
+import { useDataStoreQuery } from "./modules/useDataStoreQuery";
 
-export { useQuery, useLazyQuery, usePaginatedQuery, useMutation, currentUser, graphqlOperation, useSubscription, useLazySubscription, AuthMode };
+export {
+  useQuery,
+  useLazyQuery,
+  usePaginatedQuery,
+  useMutation,
+  currentUser,
+  graphqlOperation,
+  useSubscription,
+  useLazySubscription,
+  useDataStoreQuery,
+  AuthMode,
+};

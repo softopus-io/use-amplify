@@ -1,74 +1,43 @@
-import React, { useEffect } from "react";
-import { graphqlOperation } from "../../utils/graphqlOperation";
-import { LazyQueryTuple } from "./types";
+import { useState } from "react";
+import { DataStore } from "aws-amplify";
 
-export const useLazyQuery = <
+export interface QueryResult<TData = any> {
+  data?: TData | null;
+  error?: any;
+  loading: boolean;
+}
+
+export type LazyQueryTuple<TData> = [
+  (options?: any) => any,
+  QueryResult<TData>
+];
+
+export const useDataStoreQuery = <
   ResultType extends {},
   VariablesType extends {} = {}
-  >(
-  query: string
+>(
+  entity: any
 ): LazyQueryTuple<ResultType> => {
-  const [totalPages, setTotalPages] = React.useState<number>(1);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setErrors] = React.useState("");
-  const [data, setData] = React.useState<any>([]);
-
-  const [nextTokens, setNextTokens] = React.useState<any>([undefined]);
+  const [loading, setLoading] = useState(false);
+  const [error, setErrors] = useState("");
+  const [data, setData] = useState<any>([]);
 
   const execute = async <ResultType extends {}, VariablesType extends {} = {}>(
-    variables?: any
+    query?: any,
+    pagination?: any
   ) => {
     try {
       await setLoading(true);
 
-      const response: any = await graphqlOperation<ResultType, VariablesType>(
-        query,
-        variables
-      );
+      const response: any = await DataStore.query(entity, query, pagination);
 
       setData(response);
 
       if (response.errors) setErrors(response.errors);
-
-      const token = response[variables?.name].nextToken;
-
-      if (!token) return;
-
-      checkNextPage(variables.page, variables, token);
-
     } catch (e) {
       setErrors(e);
     } finally {
       await setLoading(false);
-    }
-  };
-
-  const checkNextPage = async (
-    page: number,
-    variables: any,
-    token: string
-  ) => {
-    if (!token) return;
-
-    const response: any = await graphqlOperation<ResultType, VariablesType>(
-      query,
-      { ...variables, nextToken: token }
-    );
-
-    if (
-      variables &&
-      response &&
-      response[variables?.name] &&
-      response[variables?.name]?.items.length > 0
-    ){
-      const shallow = nextTokens;
-
-      const nextPage = page + 1;
-
-      shallow[nextPage] = token;
-
-      await setNextTokens([...shallow]);
-      await setTotalPages(shallow.length);
     }
   };
 
@@ -78,9 +47,6 @@ export const useLazyQuery = <
       data,
       loading,
       error,
-      nextTokens,
-      setNextTokens,
-      totalPages,
     },
   ];
 };

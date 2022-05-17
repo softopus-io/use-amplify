@@ -20,8 +20,7 @@ export const graphqlOperation = async <
     query: query,
     authMode,
     variables,
-  })) as {
-    data: ResultType;
-  };
+  })) as any;
+
   return data;
 };
