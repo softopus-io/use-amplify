@@ -8,6 +8,10 @@ import { useLazyQuery } from "./modules/useLazyQuery";
 import { useLazySubscription } from "./modules/useLazySubscription";
 import { usePaginatedQuery } from "./modules/usePaginatedQuery";
 import { useDataStoreQuery } from "./modules/useDataStoreQuery";
+import {
+  useDataStoreDelete,
+  useDataStoreSave,
+} from "./modules/useDataStoreSave";
 
 export {
   useQuery,
@@ -19,5 +23,7 @@ export {
   useSubscription,
   useLazySubscription,
   useDataStoreQuery,
+  useDataStoreDelete,
+  useDataStoreSave,
   AuthMode,
 };

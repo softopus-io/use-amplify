@@ -1,7 +1,7 @@
 {
   "name": "use-amplify",
-  "version": "0.0.1",
-  "description": "Amplify Hooks",
+  "version": "0.0.2",
+  "description": "React Hooks for Amplify web and mobile applications",
   "author": "Richard Pecha",
   "license": "MIT",
   "repository": "https://github.com/OASA-ai/use-amplify",

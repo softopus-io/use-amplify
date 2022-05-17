@@ -12,7 +12,7 @@ export type LazyQueryTuple<TData> = [
   QueryResult<TData>
 ];
 
-export const useDataStoreQuery = <
+export const useDataStoreSave = <
   ResultType extends {},
   VariablesType extends {} = {}
 >(
@@ -23,13 +23,13 @@ export const useDataStoreQuery = <
   const [data, setData] = useState<any>([]);
 
   const execute = async <ResultType extends {}, VariablesType extends {} = {}>(
-    query?: any,
-    pagination?: any
+    entity?: any,
+    predicates?: any
   ) => {
     try {
       setLoading(true);
 
-      const response: any = await DataStore.query(entity, query, pagination);
+      const response: any = await DataStore.delete(entity, predicates);
 
       setData(response);
 
