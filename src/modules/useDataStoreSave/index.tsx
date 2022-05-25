@@ -25,10 +25,11 @@ export const useDataStoreSave = <
   const execute = async <ResultType extends {}, VariablesType extends {} = {}>(
     entity?: any
   ) => {
+    let response = null;
     try {
       setLoading(true);
 
-      const response: any = await DataStore.save(entity);
+      response = await DataStore.save(entity);
 
       setData(response);
 
@@ -38,6 +39,7 @@ export const useDataStoreSave = <
     } finally {
       setLoading(false);
     }
+    return response;
   };
 
   return [

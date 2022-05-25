@@ -1,6 +1,6 @@
 {
   "name": "use-amplify",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React Hooks for Amplify web and mobile applications",
   "author": "Richard Pecha",
   "license": "MIT",

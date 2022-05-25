@@ -26,10 +26,11 @@ export const useDataStoreQuery = <
     query?: any,
     pagination?: any
   ) => {
+    let response: any = null;
     try {
       setLoading(true);
 
-      const response: any = await DataStore.query(entity, query, pagination);
+      response = await DataStore.query(entity, query, pagination);
 
       setData(response);
 
@@ -39,6 +40,8 @@ export const useDataStoreQuery = <
     } finally {
       setLoading(false);
     }
+
+    return response;
   };
 
   return [

@@ -26,10 +26,11 @@ export const useDataStoreDelete = <
     entity?: any,
     predicates?: any
   ) => {
+    let response: any = null;
     try {
       setLoading(true);
 
-      const response: any = await DataStore.delete(entity, predicates);
+      response = await DataStore.delete(entity, predicates);
 
       setData(response);
 
